@@ -14,3 +14,4 @@ polars
 matplotlib
 seaborn
 pyarrow
+plotly

@@ -15,7 +15,6 @@ def readin():
     Create Daily Price Change Variable
     """
     d_f = pl.read_csv('SPY.csv',try_parse_dates=True)
-    print(d_f.head(5))
     return d_f
 
 
@@ -23,9 +22,8 @@ def get_summ_stats(d_f):
     """
     Return Summary Stats
     """
-    d_f["Close"].describe().write_csv("sumstats.csv")
-    return d_f["Close"].describe()
-
+    stats = d_f['Close'].describe()
+    return stats
 
 def dollars(value, _):
     """
@@ -39,7 +37,18 @@ def make_line_graph(d_f):
     """
     Create Line Graph of
     """
-    px.line(x=d_f["Date"], y=d_f["Close"])
+    d = d_f.to_pandas()
+    _, axes = plt.subplots()
+    d["Close"].plot()
+    axes.set_xticks(d.index)
+    plt.locator_params(axis="x", nbins=12)
+    axes.set_title("SPY Closing Stock Price")
+    axes.set_xlabel("Date")
+    axes.set_ylabel("Closing Price")
+    axes.xaxis.set_major_formatter(dates.DateFormatter("%m/%y"))
+    axes.yaxis.set_major_formatter(FuncFormatter(dollars))
+    plt.savefig("SPY_Closing.png")
+
 
 
 def main():
@@ -47,8 +56,31 @@ def main():
     Main function to perform actions
     """
     spy = readin()
-    get_summ_stats(spy)
+    stats = get_summ_stats(spy)
+
     make_line_graph(spy)
+
+    string = f'''
+    # This is the generated report for [SPY.csv](https://github.com/nogibjj/LG-Week2-Pandas/blob/main/SPY.csv).
+    #It includes both summary statistics and data visualizations
+
+    ## Summary statistics for the Close Variable
+
+    {stats.to_pandas().to_markdown()}
+
+    ## Data Visualization
+
+    ### Boxplots of each variable
+    ![LineGraph](SPY_Closing.png)
+
+    '''
+
+    # Specify the file path where you want to create the Markdown file
+    filepath = "Generated Report.md"
+
+    # 
+    with open(filepath, "w", encoding="utf-8") as md_file:
+        md_file.write(string)
 
 
 if __name__ == "__main__":

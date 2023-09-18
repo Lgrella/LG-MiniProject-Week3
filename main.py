@@ -22,7 +22,7 @@ def make_line_graph(d_f):
 
     axs.plot("Date", "Close", data=d_f)
     axs.set_xlim((np.datetime64("2022-09-15"), np.datetime64("2023-09-15")))
-    axs.set_title("Concise Date Formatter")
+    axs.set_title("SPY Closing Prices Over Time")
 
     plt.savefig("SPY_Closing.png")
 
@@ -61,17 +61,17 @@ def main():
     make_line_graph(spy)
 
     string = f'''
-    # This is the generated report for [SPY.csv](https://github.com/nogibjj/LG-Week2-Pandas/blob/main/SPY.csv).
-    #It includes both summary statistics and data visualizations
+# This is the generated report for [SPY.csv](https://github.com/nogibjj/LG-Week2-Pandas/blob/main/SPY.csv).
+#It includes both summary statistics and data visualizations
 
-    ## Summary statistics for the Close Variable
+## Summary statistics for the Close Variable
 
-    {stats.to_pandas().to_markdown()}
+{stats.to_pandas().to_markdown()}
 
-    ## Data Visualization
+## Data Visualization
 
-    ### Line Graph of SPY closing prices
-    ![LineGraph](SPY_Closing.png)
+### Line Graph of SPY closing prices
+![LineGraph](SPY_Closing.png)
 
     '''
 
@@ -80,11 +80,6 @@ def main():
 
     with open(filepath, "w", encoding="utf-8") as md_file:
         md_file.write(string)
-
-
-
-
-
 
 if __name__ == "__main__":
     main()

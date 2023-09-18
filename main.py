@@ -23,6 +23,8 @@ def make_line_graph(d_f):
     axs.plot("Date", "Close", data=d_f)
     axs.set_xlim((np.datetime64("2022-09-15"), np.datetime64("2023-09-15")))
     axs.set_title("SPY Closing Prices Over Time")
+    axs.set_xlabel("Date")
+    axs.set_ylabel("Closing Price")
 
     plt.savefig("SPY_Closing.png")
 

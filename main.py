@@ -60,7 +60,7 @@ def main():
     stats = get_summ_stats(spy)
     make_line_graph(spy)
 
-    string = f"""
+    string = f'''
     # This is the generated report for [SPY.csv](https://github.com/nogibjj/LG-Week2-Pandas/blob/main/SPY.csv).
     #It includes both summary statistics and data visualizations
 
@@ -73,13 +73,17 @@ def main():
     ### Line Graph of SPY closing prices
     ![LineGraph](SPY_Closing.png)
 
-    """
+    '''
 
     # output markdown file
     filepath = "Generated Report.md"
 
     with open(filepath, "w", encoding="utf-8") as md_file:
         md_file.write(string)
+
+
+
+
 
 
 if __name__ == "__main__":

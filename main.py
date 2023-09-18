@@ -62,7 +62,7 @@ def main():
 
     string = f'''
 # This is the generated report for [SPY.csv](https://github.com/nogibjj/LG-Week2-Pandas/blob/main/SPY.csv).
-#It includes both summary statistics and data visualizations
+# It includes both summary statistics and a data visualization
 
 ## Summary statistics for the Close Variable
 
@@ -76,7 +76,7 @@ def main():
     '''
 
     # output markdown file
-    filepath = "Generated Report.md"
+    filepath = "Report.md"
 
     with open(filepath, "w", encoding="utf-8") as md_file:
         md_file.write(string)
